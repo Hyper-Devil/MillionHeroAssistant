@@ -26,6 +26,7 @@ def get_text_from_image(image_data, app_id, app_key, app_secret, api_version=0, 
 
     options = {}
     options["language_type"] = "CHN_ENG"
+    options["detect_direction"] = "true"
 
     if api_version == 1:
         result = client.basicAccurate(image_data, options)
@@ -35,4 +36,4 @@ def get_text_from_image(image_data, app_id, app_key, app_secret, api_version=0, 
     if "error_code" in result:
         print("baidu api error: ", result["error_msg"])
         return ""
-    return "".join([words["words"] for words in result["words_result"]])
+    return [words["words"] for words in result["words_result"]]
